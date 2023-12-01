@@ -18,18 +18,10 @@
       {
         "start_date": "2023-11-19",
         "end_date": "2023-11-25"
-      },
-      {
-        "start_date": "2023-11-19",
-        "end_date": "2023-11-25"
-      },
-      {
-        "start_date": "2023-11-19",
-        "end_date": "2023-11-25"
       }
     ],
     "discount": 100,
-    "order_sum": 0,
+    "pay_status": 0,
     "order_payed": "0.00",
     "pay_status": "Оплачен",
     "courier_comment": "",
@@ -49,10 +41,6 @@
     "address": "Москва ленина 123 подъезд 3, этаж 5, кв. 43",
     "phone": "+7 908 511-51-51",
     "dates": [
-      {
-        "start_date": "2023-11-19",
-        "end_date": "2023-11-25"
-      },
       {
         "start_date": "2023-11-19",
         "end_date": "2023-11-25"
