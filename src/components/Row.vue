@@ -2,6 +2,18 @@
 import Cell from "./Cell.vue";
 const props = defineProps(["data"]);
 
+// Создаем новый объект, исключая указанные свойства
+const { discount, order_sum, order_payed, pay_status, courier_comment, inner_comment, ...newObject } = props.data;
+
+// Создаем новый объект с добавлением массива "pay" перед "courier_comment"
+const newData = {
+  ...newObject,
+  pay: [ discount, order_sum, order_payed, pay_status ],
+  courier_comment,
+  inner_comment
+};
+
+
 const remainingTime = (date) => {
   // Преобразуем строку начальной даты в объект Date
   let startDate = new Date(date);
@@ -25,27 +37,15 @@ const remainingTime = (date) => {
 <template>
   <ul class="row">
     <Cell
-      v-for="(value, key, index) in props.data"
+      v-for="(value, key, index) in newData"
       :key="index"
       :content="value"
       :class="key"
     />
-    <ul
-    class="cell__column_pay"
-  >
-    <li class="cell">
-      <p class="text">{{ props.data.discount }}</p>
-    </li>
-    <li class="cell">
-      <p class="text">{{ props.data.pay_status }}</p>
-    </li>
-    <li class="cell">
-      <p class="text">{{ props.data.order_payed }}</p>
-    </li>
-  </ul>
     <li v-if="remainingTime(props.data.dates[0].end_date) < 0" class="cell">
       <p class="text">
-        Завершилось {{ Math.abs(remainingTime(props.data.dates[0].end_date)) }} дней назад
+        Завершилось
+        {{ Math.abs(remainingTime(props.data.dates[0].end_date)) }} дней назад
       </p>
     </li>
     <li v-else class="cell">

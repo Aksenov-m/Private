@@ -19,42 +19,43 @@ function formatDate(inputDate) {
   return formattedDate;
 }
 
+console.log(props.content)
 
 </script>
 
 <template>
   <ul class="cell__column" v-if="props.class === 'tariff'">
-    <li v-for="(value, index) in props.content" :key="index">
+    <li v-for="(value, index) in props.content" :key="index" class="cell">
       <p class="text">{{ value }}</p>
     </li>
   </ul>
+
   <ul class="cell__column_diets" v-else-if="props.class === 'diets'">
-    <li v-for="(value, index) in props.content" :key="index">
+    <li v-for="(value, index) in props.content" :key="index" class="cell">
       <p class="text">{{ value }}</p>
     </li>
   </ul>
-  <!-- <ul
-    class="cell__column_pay"
-    v-else-if="props.class === 'order_payed'"
-  >
-    <li class="cell">
-      <p class="text">{{ orderDetails.order_payed }}</p>
-    </li>
-    <li class="cell">
-      <p class="text">{{ orderDetails.order_payed }}</p>
-    </li>
-    <li class="cell">
-      <p class="text">{{ orderDetails.discount }}</p>
-    </li>
-  </ul> -->
-  <ul class="cell" :class="props.class" v-else-if="props.class === 'dates'">
+
+
+  <ul class="cell__dates" :class="props.class" v-else-if="props.class === 'dates'">
     <li v-for="(value, index) in props.content" :key="index">
       <p class="text">{{ formatDate(value.start_date) + ' - ' + formatDate(value.end_date) }}</p>
     </li>
   </ul>
+
+  <ul class="cell__column_pay" :class="props.class" v-else-if="props.class === 'pay'">
+    <li v-for="(value, index) in props.content" :key="index" class="cell">
+      <p class="text" v-if="index === 0">Скидка {{ value }}%</p>
+      <p class="text" v-else-if="index === 1">Стоим.: {{ value }}р</p>
+      <p class="text" v-else-if="index === 2">Долг: {{ value }}р</p>
+      <p class="text" v-else>{{ value }}</p>
+    </li>
+  </ul>
+
   <li v-else class="cell" :class="props.class">
     <p class="text">{{ props.content }}</p>
   </li>
+
 </template>
 
 <style>

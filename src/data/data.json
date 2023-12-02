@@ -21,7 +21,7 @@
       }
     ],
     "discount": 100,
-    "pay_status": 0,
+    "order_sum": 0,
     "order_payed": "0.00",
     "pay_status": "Оплачен",
     "courier_comment": "",
