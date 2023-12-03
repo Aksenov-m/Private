@@ -1,6 +1,7 @@
 <script setup>
 import data from "../data/data.json";
 import Row from "./Row.vue";
+import { ref, computed } from 'vue';
 
 const remainingTime = (end_date) => {
   let endDate = new Date(end_date);
@@ -39,16 +40,32 @@ const updatedData = data.map((item) => {
   };
 });
 
-const sortedData = updatedData.sort((a, b) => {
-  const remainingDaysA = a.remaining_days[0];
-  const remainingDaysB = b.remaining_days[0];
+let sortOrder = ref('asc');
 
-  return remainingDaysA - remainingDaysB;
+const sortedData = computed(() => {
+  const sorted = updatedData.slice().sort((a, b) => {
+    const remainingDaysA = a.remaining_days[0];
+    const remainingDaysB = b.remaining_days[0];
+
+    if (remainingDaysA > 0 && remainingDaysB > 0) {
+      return remainingDaysA - remainingDaysB;
+    } else if (remainingDaysA === 0 && remainingDaysB === 0) {
+      return a.order_sum - b.order_sum;
+    } else if (remainingDaysA === 0) {
+      return -1;
+    } else if (remainingDaysB === 0) {
+      return 1;
+    } else {
+      return remainingDaysB - remainingDaysA;
+    }
+  });
+
+  if (sortOrder.value === 'desc') {
+    sorted.reverse();
+  }
+
+  return sorted;
 });
-
-console.log("Original Data:", data);
-console.log("Updated Data:", updatedData);
-console.log("Sorted Data:", sortedData);
 
 const nameCell = [
   "Номер",
@@ -63,12 +80,18 @@ const nameCell = [
   "Комментарий",
   "Статус заказа",
 ];
+
+function sortEvent(e) {
+  if (e.target.innerText === "Статус заказа") {
+    sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
+  }
+}
 </script>
 
 <template>
   <div>
     <div class="container__heading">
-      <h1 class="heading" v-for="(value, index) in nameCell" :key="index">{{value}}</h1>
+      <h1 class="heading" v-for="(value, index) in nameCell" :key="index" @click="sortEvent">{{value}}</h1>
     </div>
     <Row v-for="(value, key, index) in sortedData" :key="index" :data="value">
     </Row>

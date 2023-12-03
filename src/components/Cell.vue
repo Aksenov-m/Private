@@ -1,34 +1,27 @@
 <script setup>
 const props = defineProps(["content", "class"]);
 
-function formatDate(inputDate) {
-  // Преобразуем строку в объект Date
-  let dateObj = new Date(inputDate);
+const monthNames = [
+  "янв",
+  "фев",
+  "мар",
+  "апр",
+  "май",
+  "июн",
+  "июл",
+  "авг",
+  "сен",
+  "окт",
+  "ноя",
+  "дек",
+];
 
-  // Получаем месяц в числовом формате (от 0 до 11)
-  let month = dateObj.getMonth();
-
-  // Массив с названиями месяцев
-  let monthNames = [
-    "янв",
-    "фев",
-    "мар",
-    "апр",
-    "май",
-    "июн",
-    "июл",
-    "авг",
-    "сен",
-    "окт",
-    "ноя",
-    "дек",
-  ];
-
-  // Форматируем дату
-  let formattedDate = month + 1 + "." + monthNames[month];
-
-  return formattedDate;
-}
+function formatDate(date) {
+    const dateObj = new Date(date);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth();
+    return `${day < 10 ? '0' : ''}${day}.${monthNames[month]}`;
+  };
 
 </script>
 
