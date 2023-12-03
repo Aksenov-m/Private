@@ -10,21 +10,31 @@ function formatDate(inputDate) {
 
   // Массив с названиями месяцев
   let monthNames = [
-    "янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"
+    "янв",
+    "фев",
+    "мар",
+    "апр",
+    "май",
+    "июн",
+    "июл",
+    "авг",
+    "сен",
+    "окт",
+    "ноя",
+    "дек",
   ];
 
   // Форматируем дату
-  let formattedDate = (month + 1) + "." + monthNames[month];
+  let formattedDate = month + 1 + "." + monthNames[month];
 
   return formattedDate;
 }
 
-console.log(props.content)
-
+// console.log(props.content)
 </script>
 
 <template>
-  <ul class="cell__column" v-if="props.class === 'tariff'">
+  <ul class="cell__column_tariff" v-if="props.class === 'tariff'">
     <li v-for="(value, index) in props.content" :key="index" class="cell">
       <p class="text">{{ value }}</p>
     </li>
@@ -36,26 +46,49 @@ console.log(props.content)
     </li>
   </ul>
 
-
-  <ul class="cell__dates" :class="props.class" v-else-if="props.class === 'dates'">
-    <li v-for="(value, index) in props.content" :key="index">
-      <p class="text">{{ formatDate(value.start_date) + ' - ' + formatDate(value.end_date) }}</p>
+  <ul
+    class="cell__dates"
+    :class="props.class"
+    v-else-if="props.class === 'dates'"
+  >
+    <li v-for="(value, index) in props.content" :key="index" class="cell">
+      <p class="text">
+        {{ formatDate(value.start_date) + " - " + formatDate(value.end_date) }}
+      </p>
     </li>
   </ul>
-
-  <ul class="cell__column_pay" :class="props.class" v-else-if="props.class === 'pay'">
-    <li v-for="(value, index) in props.content" :key="index" class="cell">
+  <ul
+    class="cell__column_pay"
+    :class="props.class"
+    v-else-if="props.class === 'pay'"
+  >
+    <li
+      v-for="(value, key, index) in props.content[0]"
+      :key="index"
+      class="cell"
+    >
       <p class="text" v-if="index === 0">Скидка {{ value }}%</p>
       <p class="text" v-else-if="index === 1">Стоим.: {{ value }}р</p>
       <p class="text" v-else-if="index === 2">Долг: {{ value }}р</p>
-      <p class="text" v-else>{{ value }}</p>
+    </li>
+  </ul>
+
+  <ul
+    class="cell__column_status"
+    :class="props.class"
+    v-else-if="props.class === 'remaining_days'"
+  >
+    <li v-for="(value, index) in props.content" :key="index" class="cell">
+      <p class="text" v-if="value < 0">
+        Завершилось {{ Math.abs(value) }} дней назад
+      </p>
+      <p class="text" v-if="value > 0">заканчивается через {{ value }} дней</p>
     </li>
   </ul>
 
   <li v-else class="cell" :class="props.class">
     <p class="text">{{ props.content }}</p>
   </li>
-
 </template>
 
 <style>
