@@ -10,9 +10,18 @@ const remainingTime = (end_date) => {
   return daysDifference;
 };
 
-const updatedData = data.map(item => {
-  const { discount, order_sum, order_payed, pay_status, courier_comment, inner_comment, dates, ...newItem } = item;
-  const remaining_days = dates.map(date => remainingTime(date.end_date));
+const updatedData = data.map((item) => {
+  const {
+    discount,
+    order_sum,
+    order_payed,
+    pay_status,
+    courier_comment,
+    inner_comment,
+    dates,
+    ...newItem
+  } = item;
+  const remaining_days = dates.map((date) => remainingTime(date.end_date));
   return {
     ...newItem,
     dates,
@@ -21,12 +30,12 @@ const updatedData = data.map(item => {
         discount,
         order_sum,
         order_payed,
-        pay_status
-      }
+        pay_status,
+      },
     ],
     courier_comment,
     inner_comment,
-    remaining_days
+    remaining_days,
   };
 });
 
@@ -41,13 +50,50 @@ console.log("Original Data:", data);
 console.log("Updated Data:", updatedData);
 console.log("Sorted Data:", sortedData);
 
+const nameCell = [
+  "Номер",
+  "Имя",
+  "Диета",
+  "Тариф",
+  "Адрес",
+  "Телефон",
+  "Дата заказа",
+  "Оплата",
+  "Доставка",
+  "Комментарий",
+  "Статус заказа",
+];
 </script>
 
 <template>
   <div>
-    <Row v-for="(value, index) in sortedData" :key="index" :data="value">
+    <div class="container__heading">
+      <h1 class="heading" v-for="(value, index) in nameCell" :key="index">{{value}}</h1>
+    </div>
+    <Row v-for="(value, key, index) in sortedData" :key="index" :data="value">
     </Row>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.container__heading{
+  display: grid;
+  grid-template-columns: 40px repeat(auto-fit, minmax(50px, 1fr));
+  align-items: center;
+}
+.heading{
+  margin: 0 auto;
+  width: 100%;
+  height: 40px;
+  background-color: cadetblue;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  border: 2px solid rgb(20, 20, 20);
+  cursor: pointer;
+}
+
+
+</style>
