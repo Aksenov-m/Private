@@ -17,10 +17,18 @@ const props = defineProps(["data"]);
 
 <style scoped>
 .row {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 40px repeat(auto-fit, minmax(50px, 1fr));
+  justify-content: stretch;
   align-items: center;
-  justify-content: space-around;
+  width: 100%;
   list-style: none;
+  border: 2px solid rgba(222, 226, 230, 1);
+  margin: 0;
+  padding: 0;
+}
+
+.row:nth-child(2n) {
+  background-color: rgba(242, 242, 242, 1);
 }
 </style>

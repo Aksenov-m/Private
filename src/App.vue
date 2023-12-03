@@ -6,7 +6,6 @@ import Container from './components/Container.vue'
 
 <template>
 <Container/>
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 
 <style scoped>
