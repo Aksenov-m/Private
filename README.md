@@ -1,7 +1,27 @@
-# Vue 3 + Vite
+### Описание: 
+Тестовое задание для компании PrivateCRM.
+Приложение написано на популярном фреймворке VueJs.
+Реализована таблица в виде Excel, отображающая данные из JSON.
+Выполнена сортировка данных по столбцу статус заказа.
+По нажатию на заголовок столбца статус заказа реализована смена направления сортировки (по возрастанию/убыванию).
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### Технологический стек
+* :point_right: VueJs
+* :point_right: HTML
+* :point_right: CSS
+##### версия языка: :ru:
 
-## Recommended IDE Setup
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Запускает приложение в режиме разработки
+
+```sh
+npm run dev
+Откройте http://localhost:5173/Private , чтобы просмотреть его в браузере.
+```
+
+### Сборка приложения
+
+```sh
+npm run build
+```
+* [Ссылка на сайт](https://aksenov-m.github.io/Private/)
